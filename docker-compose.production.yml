@@ -6,12 +6,14 @@ volumes:
 services:
   db:
     image: postgres:13
+    restart: unless-stopped
     env_file: .env
     volumes:
       - pg_data:/var/lib/postgresql/data
 
   backend:
     image: alexeyselyanin/taski_backend:latest
+    restart: unless-stopped
     env_file: .env
     volumes:
       - static:/backend/static
@@ -28,6 +30,7 @@ services:
 
   gateway:
     image: alexeyselyanin/taski_gateway:latest
+    restart: unless-stopped
     env_file: .env
     ports:
       - "9001:80"
